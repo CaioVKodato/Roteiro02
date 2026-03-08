@@ -1,9 +1,11 @@
 import json
+import os
 import requests
 
 def ler_configuracao(origem: str):
     if origem == "local":
-        with open("config.json") as f:
+        base = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(base, "config.json")) as f:
             return json.load(f)
     elif origem == "http":
         resp = requests.get("http://config-srv/config")
